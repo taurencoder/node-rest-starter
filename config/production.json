@@ -1,0 +1,47 @@
+{
+  "app": {
+    "jwtSecret": "default jwt secret",
+    "sessionId": "default session",
+    "hashSecret": "default hash",
+    "cors": true,
+    "port": 9000
+  },
+  "log4js": {
+    "level": "info",
+    "reloadSecs": 300,
+    "appenders": [
+      {
+        "type": "file",
+        "filename": "logs/app.log",
+        "maxLogSize": 20480,
+        "backups": 10
+      },
+      {
+        "type": "console"
+      }
+    ]
+  },
+  "database": {
+    "client": "pg",
+    "connection": {
+      "host": "127.0.0.1",
+      "charset": "utf8",
+      "user": "root",
+      "password": "default",
+      "database": "default",
+      "timezone": "UTC"
+    },
+    "pool": { "min": 0, "max": 5 },
+    "debug": false
+  },
+  "pingpp": {
+    "apiKey": "api key here",
+    "appId": "api key here"
+  },
+  "qn": {
+    "accessKey": "5LznGMwpOvUjsrtBZgqlJP6_GOPIpng7kBx3mjuR",
+    "secretKey": "SmYMqx3bou_HyxxF9rupWS4eBWwBUaTL6hJ0dYCy",
+    "bucket" : "default",
+    "domain": "ohuvz6404.bkt.clouddn.com"
+  }
+}

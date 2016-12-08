@@ -1,0 +1,18 @@
+{
+  "bad request": "非法的请求内容",
+  "Internal Server Error": "服务器内部错误",
+  "Cannot find user for given id": "不能找到指定的用户",
+  "Failed to verify token signature": "令牌签名验证失败",
+  "Login failed, please check username and password": "登录失败，请核对用户名和密码后重试",
+  "Account name %(username)s has already been registered": "用户名 %(username)s 已经被占用",
+  "service not available": "服务暂时不可用",
+  "Cannot find user for account name %(username)s": "您登录所使用的用户名并不存在: %(username)s",
+  "Authentication failed": "获取授权失败",
+  "Authentication must be provided": "必须提供授权才能进行操作",
+  "No permission to reset password": "没有权限重置该用户密码",
+  "Old password is invalid": "旧密码不正确",
+  "You have payment in progress, please try again later": "您有其他资金操作进行中，请稍后重试",
+  "Not authorized": "未被授权的操作",
+  "Cannot find user to reset password": "不能找到指定的用户以重置密码",
+  "Token expired": "登录已过期"
+}
