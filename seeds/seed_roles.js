@@ -9,7 +9,7 @@ exports.seed = function (knex, Promise) {
         // Inserts seed entries
         knex('operation').insert({
           id: 1001,
-          credit: 0,
+          name: 'LOGIN',
         }),
         knex('role').insert([{
           id: 1001,

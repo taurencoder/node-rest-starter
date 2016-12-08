@@ -20,9 +20,9 @@
     "connection": {
       "host": "127.0.0.1",
       "charset": "utf8",
-      "user": "root",
-      "password": "default",
-      "database": "default",
+      "user": "starter",
+      "password": "start123",
+      "database": "starter_db",
       "timezone": "UTC"
     },
     "pool": { "min": 0, "max": 5 },

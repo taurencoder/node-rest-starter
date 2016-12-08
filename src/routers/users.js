@@ -5,21 +5,19 @@ import userService from '../services/user-service';
 import GeneralError from '../errors/general-error';
 
 const getMyProfile = async ({ setBody, setStatus, extra }) => {
-  const user = await userService.findUserById(extra.user.id, true, extra);
+  const user = await userService.findUserById(extra.user.id, extra);
   setBody(user);
   setStatus(200);
 };
 
 const getUserList = async ({ setBody, setStatus, extra }) => {
-  const includeFullDetails = extra && extra.user;
-  const users = await userService.findAllUsers(includeFullDetails, extra);
+  const users = await userService.findAllUsers(extra);
   setBody(users);
   setStatus(200);
 };
 
 const getUserInfo = async ({ setBody, setStatus, params, extra }) => {
-  const includeFullDetails = extra && extra.user;
-  const user = await userService.findUserById(params.id, includeFullDetails, extra);
+  const user = await userService.findUserById(params.id, extra);
   if (user) {
     setBody(user);
     setStatus(200);

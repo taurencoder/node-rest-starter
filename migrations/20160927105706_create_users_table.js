@@ -21,8 +21,8 @@ exports.up = function (knex, promise) {
     t.string('name', 50);
   }).then(() => (
     promise.all([
-      knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 2000'),
-      knex.raw('ALTER SEQUENCE roles_id_seq RESTART WITH 2000'),
+      knex.raw('ALTER SEQUENCE user_id_seq RESTART WITH 2000'),
+      knex.raw('ALTER SEQUENCE role_id_seq RESTART WITH 2000'),
     ])
   ));
 };
@@ -30,6 +30,6 @@ exports.up = function (knex, promise) {
 exports.down = function (knex) {
   return knex.schema
     .dropTable('operation')
-    .dropTable('roles')
-    .dropTable('users');
+    .dropTable('role')
+    .dropTable('user');
 };

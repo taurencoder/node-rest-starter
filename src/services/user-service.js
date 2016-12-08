@@ -12,25 +12,18 @@ const hash = thenify(bcrypt.hash);
 const compare = thenify(bcrypt.compare);
 
 const UserService = {
-  findUserById: async (userId, includeFullDetails, extra) => {
+  findUserById: async (userId, extra) => {
     const { log } = extra;
     log.info(`start fetching user for id: ${userId}`);
     const relations = [...(extra.withRelated || []), 'role'];
-    if (includeFullDetails) {
-      relations.push('account');
-    }
     const options = { ...extra, withRelated: relations };
     return await User.findOne(userId, options);
   },
 
-  findAllUsers: async (includeFullDetails, extra) => {
+  findAllUsers: async (extra) => {
     const { log } = extra;
     log.info('start fetching user list...');
     const relations = [...(extra.withRelated || []), 'role'];
-    if (includeFullDetails) {
-      authorize(extra.user, 'manage', 'all');
-      relations.push('account');
-    }
     const options = { ...extra, withRelated: relations };
     return await User.findAll(options);
   },
@@ -38,7 +31,7 @@ const UserService = {
   findUserByProperties: async (params, extra) => {
     const { log } = extra;
     log.info(`start fetching user for properties: ${JSON.stringify(params)}`);
-    const options = { ...extra, withRelated: ['role', 'account'] };
+    const options = { ...extra, withRelated: ['role'] };
     return await User.findOneByProperties(params, options);
   },
 
@@ -78,7 +71,7 @@ const UserService = {
       roleId: userRole.get('id'),
     }, extra);
 
-    const savedUser = await UserService.findUserById(user.get('id'), false, extra);
+    const savedUser = await UserService.findUserById(user.get('id'), extra);
     savedUser.set('authorization', createToken(username));
     return savedUser;
   },
@@ -96,7 +89,7 @@ const UserService = {
       const salt = await genSalt();
       const hashPwd = await hash(newPassword || '', salt);
       await User.update({ id: userId, password: hashPwd });
-      return await UserService.findUserById(userId, false, extra);
+      return await UserService.findUserById(userId, extra);
     }
 
     GeneralError.badRequest('Old password is invalid').boom();
@@ -108,10 +101,8 @@ const UserService = {
 
     const { log } = extra;
     log.info(`start updating user profile for id: ${user.id}`);
-    return await User.update(pick(['id', 'nickname', 'name', 'position', 'gender', 'email',
-      'birthDate', 'poster', 'manifesto', 'phoneNumber', 'province', 'city',
-      'skillEnergy', 'skillAttention', 'skillPerformance', 'skillActivity',
-      'skillVictories', 'skillLadderPoints'], user), extra);
+    return await User.update(pick(['id', 'nickname', 'name', 'gender', 'email',
+      'birthDate', 'manifesto'], user), extra);
   },
 
 };
