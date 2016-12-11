@@ -1,8 +1,9 @@
 import knex from 'knex';
-import { pick, difference } from 'lodash/fp';
+import { pick, difference, prop, flow, map } from 'lodash/fp';
 import Joi from 'joi';
 import config from 'config';
 import bookshelf from 'bookshelf';
+
 import { underscore, camelize } from '../utils/formatter';
 
 const myBookshelf = bookshelf(knex(config.database));
@@ -29,7 +30,10 @@ myBookshelf.Model = myBookshelf.Model.extend({
     let validation = null;
     // model is not new or update method explicitly set
     if ((model && !model.isNew()) || (options && (options.method === 'update' || options.patch === true))) {
-      const schemaKeys = this.validate._inner.children.map(child => child.key);
+      const schemaKeys = flow(
+        prop('_inner.children'),
+        map(prop('key')),
+      )(this.validate);
       const presentKeys = Object.keys(attrs);
       const optionalKeys = difference(schemaKeys, presentKeys);
       // only validate the keys that are being updated

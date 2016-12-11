@@ -3,7 +3,7 @@ import User from '../models/user';
 import Role from '../models/role';
 
 export default (user) => {
-  cancan.configure(User, function () {
+  cancan.configure(User, () => {
     const userId = user.get('id');
     const role = user.related('role').get('name');
 
@@ -11,7 +11,7 @@ export default (user) => {
       this.can('manage', 'all');
     } else {
       this.can('manage', User,
-        target => Number(target.get('id')) === Number(userId)
+        target => Number(target.get('id')) === Number(userId),
       );
     }
   });

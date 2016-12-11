@@ -9,7 +9,8 @@
     "migrate": "knex migrate:latest",
     "db": "knex migrate:latest && knex seed:run",
     "build": "babel src --out-dir lib && cp -R src/views lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "eslint ./src"
   },
   "author": "Daniel Qin <taurencoder@gmail.com>",
   "license": "ISC",
@@ -41,24 +42,22 @@
     "pg": "6.1.0",
     "pingpp": "2.0.8",
     "qn": "1.3.0",
-    "ramda": "^0.22.1",
     "seedrandom": "2.4.2",
     "shortid": "2.2.6",
     "sprintf": "0.1.5",
     "thenify": "3.2.0"
   },
   "devDependencies": {
-    "babel-cli": "6.14.0",
-    "babel-core": "6.14.0",
-    "babel-eslint": "6.1.2",
-    "babel-plugin-transform-async-to-generator": "6.8.0",
-    "babel-plugin-transform-builtin-extend": "1.1.0",
-    "babel-plugin-transform-object-rest-spread": "6.8.0",
+    "babel-cli": "6.18.0",
+    "babel-core": "6.20.0",
+    "babel-eslint": "7.1.1",
+    "babel-plugin-transform-async-to-generator": "6.16.0",
+    "babel-plugin-transform-object-rest-spread": "6.20.2",
     "babel-preset-es2015-node5": "1.2.0",
-    "babel-register": "6.14.0",
-    "eslint": "^3.6.0",
-    "eslint-config-airbnb-base": "8.0.0",
-    "eslint-plugin-import": "1.16.0",
-    "nodemon": "1.10.2"
+    "babel-register": "6.18.0",
+    "eslint": "3.12.0",
+    "eslint-config-airbnb-base": "10.0.1",
+    "eslint-plugin-import": "2.2.0",
+    "nodemon": "1.11.0"
   }
 }

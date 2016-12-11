@@ -1,3 +1,5 @@
+/* eslint no-underscore-dangle: 0 */
+
 import { assign, set } from 'lodash';
 import { map } from 'lodash/fp';
 
@@ -47,19 +49,17 @@ export default (app, i18nOptions, options = {}) => {
           field: path,
           message,
         }))(errors.details);
+      } else if (typeof errors === 'string') {
+        body.errors = singleError(context, errors, {});
       } else {
-        if (typeof errors === 'string') {
-          body.errors = singleError(context, errors, {});
+        const keys = Object.keys(errors);
+        if (keys.length > 0) {
+          body.errors = keys.map(key => ({
+            field: key,
+            message: context.i18n.__(errors[key]),
+          }));
         } else {
-          const keys = Object.keys(errors);
-          if (keys.length > 0) {
-            body.errors = keys.map(key => ({
-              field: key,
-              message: context.i18n.__(errors[key]),
-            }));
-          } else {
-            body.errors = singleError(context, errorReason.error);
-          }
+          body.errors = singleError(context, errorReason.error);
         }
       }
       this.setStatus(status || 500);

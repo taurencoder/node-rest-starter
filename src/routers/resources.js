@@ -9,7 +9,7 @@ import GeneralError from '../errors/general-error';
 const qnClient = qn.create(config.get('qn'));
 const qnUploadPromise = thenify(qnClient.uploadFile).bind(qnClient);
 
-const uploadFile = async({ setBody, setStatus, request: { files } }) => {
+const uploadFile = async ({ setBody, setStatus, request: { files } }) => {
   if (files.length) {
     const results = await Promise.all(files.map(file => (
       qnUploadPromise(file.path, { key: `${uuid.v4()}-${file.name}`, 'x:filename': file.name })
